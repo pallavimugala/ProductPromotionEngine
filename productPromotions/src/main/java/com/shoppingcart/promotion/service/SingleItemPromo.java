@@ -40,10 +40,10 @@ public class SingleItemPromo implements Promotion {
         Optional<Product> item = cart.getItemForSku(this.sku);
 
         if (item.isPresent() && cart.getCartItems().get(item.get()) >= this.quantity) {
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     @Override
