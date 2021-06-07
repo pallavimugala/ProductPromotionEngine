@@ -11,21 +11,17 @@ import java.util.List;
 import java.util.Map;
 
 public class ComboItemPromo implements Promotion {
-    private List<Character> skus;
-    private Double promoPrice;
-
-    private ComboItemPromo() {
-    }
+    private  List<Character> skus;
+    private  Double promoPrice;
 
     public ComboItemPromo(List<Character> skus, Double promoPrice) {
         this.skus = skus;
         this.promoPrice = promoPrice;
     }
 
-    public List<Character> getSkus() {
-        return skus;
-    }
+    private ComboItemPromo() {
 
+    }
     @Override
     public Double getPromoPrice() {
         return promoPrice;
@@ -43,18 +39,18 @@ public class ComboItemPromo implements Promotion {
 
         for (char sku : skus) {
             if (!cartCopy.containsSku(sku)) {
-                return true;
+                return false;
             } else {
                 cartCopy.removeItemFromCart(Inventory.getItem(sku), 1);
             }
         }
 
-        return false;
+        return true;
     }
 
     @Override
     public Cart applyPromoOnceAndGiveUpdatedCart(Cart cart) throws ProductNotFoundException {
-        if (isApplicable(cart)) {
+        if (!isApplicable(cart)) {
             throw new IllegalStateException("Check if promo can be applied first.");
         }
 

@@ -14,7 +14,7 @@ public class PromotionEngineImpl implements PromotionEngine {
 
     @Override
     public Double applyPromotions(List<Promotion> currentPromotions, Cart cart) throws InvalidCartException {
-        Double price = 0.0;
+        double price = 0.0;
         Map<Product, Integer> cartItems = cart.getCartItems();
 
         // Calculate initial fixed unit prices for all items in cart
@@ -65,7 +65,7 @@ public class PromotionEngineImpl implements PromotionEngine {
             }
         }
 
-        Cart updatedCart = promoToBeApplied.applyPromoOnceAndGiveUpdatedCart(cart);
+        Cart updatedCart = promoToBeApplied != null ? promoToBeApplied.applyPromoOnceAndGiveUpdatedCart(cart) : null;
         currPrice = currPrice - priceReduction;
 
         /*

@@ -8,12 +8,9 @@ import com.shoppingcart.promotion.model.Product;
 import java.util.Optional;
 
 public class SingleItemPromo implements Promotion {
-    private Character sku;
-    private Integer quantity;
-    private Double promoPrice;
-
-    private SingleItemPromo() {
-    }
+    private  Character sku;
+    private  Integer quantity;
+    private  Double promoPrice;
 
     public SingleItemPromo(Character sku, Integer quantity, Double promoPrice) {
         this.sku = sku;
@@ -21,12 +18,8 @@ public class SingleItemPromo implements Promotion {
         this.promoPrice = promoPrice;
     }
 
-    public Character getSku() {
-        return sku;
-    }
+    private SingleItemPromo() {
 
-    public Integer getQuantity() {
-        return quantity;
     }
 
     @Override
@@ -39,17 +32,13 @@ public class SingleItemPromo implements Promotion {
 
         Optional<Product> item = cart.getItemForSku(this.sku);
 
-        if (item.isPresent() && cart.getCartItems().get(item.get()) >= this.quantity) {
-            return true;
-        }
-
-        return false;
+        return item.isPresent() && cart.getCartItems().get(item.get()) >= this.quantity;
     }
 
     @Override
     public Cart applyPromoOnceAndGiveUpdatedCart(Cart cart) throws ProductNotFoundException {
 
-        if (this.isApplicable(cart)) {
+        if (!this.isApplicable(cart)) {
             throw new IllegalStateException("Check if promo can be applied first.");
         }
 
