@@ -6,26 +6,28 @@ import com.shoppingcart.promotion.exception.EmptyCartException;
 import com.shoppingcart.promotion.exception.InvalidCartException;
 import com.shoppingcart.promotion.exception.ProductNotFoundException;
 import com.shoppingcart.promotion.model.Cart;
-import com.shoppingcart.promotion.model.Inventory;
 import com.shoppingcart.promotion.service.Promotion;
 import com.shoppingcart.promotion.util.InventoryGenerator;
 import com.shoppingcart.promotion.util.PromotionsGenerator;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CaseStudyExampleTests {
     private static PromotionEngine promotionEngine;
     private static List<Promotion> promotionList;
-    private static Inventory inventory;
     private static Cart cart;
 
     @BeforeAll
-    public static void setup() throws EmptyCartException, ProductNotFoundException {
+    public static void setup() {
         promotionEngine = new PromotionEngineImpl();
         promotionList = PromotionsGenerator.generatePromotions();
-        inventory = InventoryGenerator.generateInventory();
+        InventoryGenerator.generateInventory();
         cart = new Cart();
     }
 
@@ -40,15 +42,22 @@ public class CaseStudyExampleTests {
         Assertions.assertEquals(100,finalPrice);
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("cartItemsList")
     @DisplayName("Scenario B")
     @Order(2)
-    public void scenarioB() throws EmptyCartException, ProductNotFoundException, InvalidCartException {
+    public void scenarioB(List<Character> orderList) throws EmptyCartException, ProductNotFoundException, InvalidCartException {
         Double finalPrice;
         cart.clearCart();
-        cart.setOrderList(List.of('A','B','C','A','A','A','A','B','B','B','B'));
+        cart.setOrderList(orderList);
         finalPrice = promotionEngine.applyPromotions(promotionList, cart);
         Assertions.assertEquals(370,finalPrice);
+    }
+
+    private static Stream<Arguments> cartItemsList() {
+        return Stream.of(
+                Arguments.of(List.of('A','B','C','A','A','A','A','B','B','B','B'))
+        );
     }
 
     /**
