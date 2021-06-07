@@ -1,3 +1,5 @@
+package com.shoppingcart.promotion.test;
+
 import com.shoppingcart.promotion.exception.EmptyCartException;
 import com.shoppingcart.promotion.exception.ProductNotFoundException;
 import com.shoppingcart.promotion.model.Cart;

@@ -1,4 +1,4 @@
-package test;
+package com.shoppingcart.promotion.test;
 
 import com.shoppingcart.promotion.engine.PromotionEngine;
 import com.shoppingcart.promotion.engine.PromotionEngineImpl;
