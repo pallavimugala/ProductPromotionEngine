@@ -22,10 +22,6 @@ public class ComboItemPromo implements Promotion {
     private ComboItemPromo() {
 
     }
-    @Override
-    public Double getPromoPrice() {
-        return promoPrice;
-    }
 
     @Override
     public boolean isApplicable(Cart cart) throws ProductNotFoundException {

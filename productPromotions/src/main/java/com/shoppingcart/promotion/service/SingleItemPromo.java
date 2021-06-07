@@ -23,11 +23,6 @@ public class SingleItemPromo implements Promotion {
     }
 
     @Override
-    public Double getPromoPrice() {
-        return promoPrice;
-    }
-
-    @Override
     public boolean isApplicable(Cart cart) {
 
         Optional<Product> item = cart.getItemForSku(this.sku);
