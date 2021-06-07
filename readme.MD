@@ -10,8 +10,14 @@
 
 ** Scenarios considered while developing this
   
-  * Single Item Promotions -- the model is generic to be able to add more single item promotions in future
+  * Single Item Promotions 
   * Combo Item Promotions
+     > The model is generic to be able to add more single/combo item promotions in future
+
+     > Once the promotion is applied on a specific item , cart is updated to make sure that a promotion will be mutually
+      exclusive on a product
+    
+     > Best possible promotion is calculated by analyzing the best discountable amount
 
 ** FEW SAMPLE TEST SCENARIOS COVERED
   
@@ -29,6 +35,8 @@ CASE 2: A,5,
 
 _Assumptions_
  * Inputs are sent in character arrays
+ * Inorder for the code to be more efficient, greedy algorithm needs to be applied if there are
+   100's of promotions on SKU's . This solution is simplistic approach which can be achieved in few hours of time
  
 
  
